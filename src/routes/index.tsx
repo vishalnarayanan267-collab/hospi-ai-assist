@@ -60,7 +60,8 @@ function Dashboard() {
   const wearable = wearableService.data();
   const env = environmentService.current();
   const recommended = hospitalService.recommended().slice(0, 3);
-  const ambulance = ambulanceService.list()[0];
+  const top = recommended[0]!;
+  const ambulance = ambulanceService.list()[0]!;
 
   const steps = EMERGENCY_STEPS.map((s, i) => ({
     label: s.label,
@@ -122,11 +123,11 @@ function Dashboard() {
         />
         <MetricCard
           label="Nearest ICU bed"
-          value={recommended[0].icuBeds.available}
+          value={top.icuBeds.available}
           unit="free"
           icon={BedDouble}
           tone="primary"
-          hint={`${recommended[0].name} · ${recommended[0].distanceKm} km`}
+          hint={`${top.name} · ${top.distanceKm} km`}
         />
       </div>
 
@@ -134,13 +135,13 @@ function Dashboard() {
         <div className="space-y-4 lg:col-span-2">
           <AIRecommendationCard
             title="AI triage recommendation"
-            body={`${recommended[0].name} — ${recommended[0].aiReason}. Estimated door-to-care time ${recommended[0].etaMin + recommended[0].waitingTimeMin} minutes.`}
-            confidence={recommended[0].aiScore}
+            body={`${top.name} — ${top.aiReason}. Estimated door-to-care time ${top.etaMin + top.waitingTimeMin} minutes.`}
+            confidence={top.aiScore}
             actions={
               <>
                 <Button
                   size="sm"
-                  onClick={() => selectHospital(recommended[0].id, recommended[0].name)}
+                  onClick={() => selectHospital(top.id, top.name)}
                 >
                   Select hospital
                 </Button>
@@ -148,7 +149,7 @@ function Dashboard() {
                   size="sm"
                   variant="outline"
                   onClick={() =>
-                    reserveBed(recommended[0].id, recommended[0].name, "Cardiac ICU bed")
+                    reserveBed(top.id, top.name, "Cardiac ICU bed")
                   }
                 >
                   Reserve ICU bed
@@ -172,7 +173,7 @@ function Dashboard() {
             <MapPanel
               patientLabel={env.location}
               ambulanceLabel={ambulance.vehicleNo}
-              hospitalLabel={recommended[0].name}
+              hospitalLabel={top.name}
               progress={emergencyActive ? 62 : 30}
               etaMin={ambulance.etaMin}
               height={280}
@@ -195,7 +196,7 @@ function Dashboard() {
               <HospitalCard
                 key={h.id}
                 hospital={h}
-                recommended={h.id === recommended[0].id}
+                recommended={h.id === top.id}
                 selected={selectedHospitalId === h.id}
                 reservedBed={reservedBeds[h.id]}
                 onSelect={() => selectHospital(h.id, h.name)}
