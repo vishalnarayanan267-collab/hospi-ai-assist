@@ -207,8 +207,8 @@ export function HospitalCard({
   recommended?: boolean | undefined;
   selected?: boolean | undefined;
   reservedBed?: string | undefined;
-  onSelect?: () => void | undefined;
-  onReserve?: () => void | undefined;
+  onSelect?: (() => void) | undefined;
+  onReserve?: (() => void) | undefined;
 }) {
   return (
     <article
@@ -306,7 +306,7 @@ export function DoctorCard({
   doctor: Doctor;
   hospitalName?: string | undefined;
   notified?: boolean | undefined;
-  onNotify?: () => void | undefined;
+  onNotify?: (() => void) | undefined;
 }) {
   const tone =
     doctor.availability === "available"
@@ -376,7 +376,7 @@ export function AmbulanceCard({
 }: {
   ambulance: Ambulance;
   destination?: string | undefined;
-  onCall?: () => void | undefined;
+  onCall?: (() => void) | undefined;
   active?: boolean | undefined;
 }) {
   const tone =
@@ -515,7 +515,7 @@ export function BedAvailabilityCard({
 }: {
   hospital: Hospital;
   reservedBed?: string | undefined;
-  onReserve?: (bedType: string) => void | undefined;
+  onReserve?: ((bedType: string) => void) | undefined;
 }) {
   const rows = [
     { label: "ICU beds", v: hospital.icuBeds, tone: "emergency" as const },
@@ -701,7 +701,7 @@ export function QuickActionCard({
   icon: ComponentType<{ className?: string }>;
   tone?: "primary" | "emergency" | "success" | "accent" | "warning" | undefined;
   to?: string | undefined;
-  onClick?: () => void | undefined;
+  onClick?: (() => void) | undefined;
 }) {
   const toneMap = {
     primary: "bg-primary-soft text-primary",
@@ -775,7 +775,7 @@ export function NotificationCard({ n }: { n: AppNotification }) {
 export function Timeline({
   steps,
 }: {
-  steps: { label: string; detail: string; time?: string; state: "done" | "active" | "pending" }[];
+  steps: { label: string; detail: string; time?: string | undefined; state: "done" | "active" | "pending" }[];
 }) {
   return (
     <ol className="relative space-y-1">
