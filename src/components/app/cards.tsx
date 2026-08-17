@@ -46,11 +46,11 @@ export function MetricCard({
 }: {
   label: string;
   value: string | number;
-  unit?: string;
-  hint?: string;
-  icon?: ComponentType<{ className?: string }>;
-  tone?: "primary" | "success" | "warning" | "emergency" | "accent";
-  progress?: number;
+  unit?: string | undefined;
+  hint?: string | undefined;
+  icon?: ComponentType<{ className?: string }> | undefined;
+  tone?: "primary" | "success" | "warning" | "emergency" | "accent" | undefined;
+  progress?: number | undefined;
 }) {
   const toneMap = {
     primary: "bg-primary-soft text-primary",
@@ -110,14 +110,14 @@ export function ChartCard({
   className,
 }: {
   title: string;
-  description?: string;
-  action?: ReactNode;
-  type?: "area" | "line" | "bar";
+  description?: string | undefined;
+  action?: ReactNode | undefined;
+  type?: "area" | "line" | "bar" | undefined;
   data: Record<string, unknown>[];
   xKey: string;
   series: { key: string; label: string; color: string }[];
-  height?: number;
-  className?: string;
+  height?: number | undefined;
+  className?: string | undefined;
 }) {
   return (
     <section
@@ -204,11 +204,11 @@ export function HospitalCard({
   onReserve,
 }: {
   hospital: Hospital;
-  recommended?: boolean;
-  selected?: boolean;
-  reservedBed?: string;
-  onSelect?: () => void;
-  onReserve?: () => void;
+  recommended?: boolean | undefined;
+  selected?: boolean | undefined;
+  reservedBed?: string | undefined;
+  onSelect?: (() => void) | undefined;
+  onReserve?: (() => void) | undefined;
 }) {
   return (
     <article
@@ -304,9 +304,9 @@ export function DoctorCard({
   onNotify,
 }: {
   doctor: Doctor;
-  hospitalName?: string;
-  notified?: boolean;
-  onNotify?: () => void;
+  hospitalName?: string | undefined;
+  notified?: boolean | undefined;
+  onNotify?: (() => void) | undefined;
 }) {
   const tone =
     doctor.availability === "available"
@@ -375,9 +375,9 @@ export function AmbulanceCard({
   active,
 }: {
   ambulance: Ambulance;
-  destination?: string;
-  onCall?: () => void;
-  active?: boolean;
+  destination?: string | undefined;
+  onCall?: (() => void) | undefined;
+  active?: boolean | undefined;
 }) {
   const tone =
     ambulance.status === "en-route"
@@ -452,8 +452,8 @@ export function EmergencyCard({
   actions,
 }: {
   emergency: EmergencyCase;
-  hospitalName?: string;
-  actions?: ReactNode;
+  hospitalName?: string | undefined;
+  actions?: ReactNode | undefined;
 }) {
   const tone =
     emergency.severity === "critical"
@@ -514,8 +514,8 @@ export function BedAvailabilityCard({
   onReserve,
 }: {
   hospital: Hospital;
-  reservedBed?: string;
-  onReserve?: (bedType: string) => void;
+  reservedBed?: string | undefined;
+  onReserve?: ((bedType: string) => void) | undefined;
 }) {
   const rows = [
     { label: "ICU beds", v: hospital.icuBeds, tone: "emergency" as const },
@@ -589,7 +589,7 @@ export function WearableMetricCard({
 }: {
   label: string;
   value: string | number;
-  unit?: string;
+  unit?: string | undefined;
   status: "normal" | "elevated" | "critical";
   range: string;
   icon: ComponentType<{ className?: string }>;
@@ -659,8 +659,8 @@ export function AIRecommendationCard({
 }: {
   title: string;
   body: string;
-  confidence?: number;
-  actions?: ReactNode;
+  confidence?: number | undefined;
+  actions?: ReactNode | undefined;
 }) {
   return (
     <article className="rounded-3xl border border-accent/25 bg-accent-soft p-5 shadow-soft">
@@ -699,9 +699,9 @@ export function QuickActionCard({
   label: string;
   description: string;
   icon: ComponentType<{ className?: string }>;
-  tone?: "primary" | "emergency" | "success" | "accent" | "warning";
-  to?: string;
-  onClick?: () => void;
+  tone?: "primary" | "emergency" | "success" | "accent" | "warning" | undefined;
+  to?: string | undefined;
+  onClick?: (() => void) | undefined;
 }) {
   const toneMap = {
     primary: "bg-primary-soft text-primary",
@@ -775,7 +775,7 @@ export function NotificationCard({ n }: { n: AppNotification }) {
 export function Timeline({
   steps,
 }: {
-  steps: { label: string; detail: string; time?: string; state: "done" | "active" | "pending" }[];
+  steps: { label: string; detail: string; time?: string | undefined; state: "done" | "active" | "pending" }[];
 }) {
   return (
     <ol className="relative space-y-1">
@@ -831,9 +831,9 @@ export function MapPanel({
   patientLabel: string;
   ambulanceLabel: string;
   hospitalLabel: string;
-  progress?: number;
-  etaMin?: number;
-  height?: number;
+  progress?: number | undefined;
+  etaMin?: number | undefined;
+  height?: number | undefined;
   markers?: { label: string; x: number; y: number; tone: "primary" | "success" | "warning" }[];
 }) {
   const clamped = Math.min(96, Math.max(4, progress));

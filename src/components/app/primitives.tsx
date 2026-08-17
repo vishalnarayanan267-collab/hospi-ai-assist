@@ -11,10 +11,10 @@ export function PageHeader({
   tone = "default",
 }: {
   title: string;
-  description?: string;
-  eyebrow?: string;
-  actions?: ReactNode;
-  tone?: "default" | "emergency" | "data" | "calm";
+  description?: string | undefined;
+  eyebrow?: string | undefined;
+  actions?: ReactNode | undefined;
+  tone?: "default" | "emergency" | "data" | "calm" | undefined;
 }) {
   const toneRing = {
     default: "",
@@ -59,13 +59,13 @@ export function SectionCard({
   bodyClassName,
   icon: Icon,
 }: {
-  title?: string;
-  description?: string;
-  action?: ReactNode;
+  title?: string | undefined;
+  description?: string | undefined;
+  action?: ReactNode | undefined;
   children: ReactNode;
-  className?: string;
-  bodyClassName?: string;
-  icon?: ComponentType<{ className?: string }>;
+  className?: string | undefined;
+  bodyClassName?: string | undefined;
+  icon?: ComponentType<{ className?: string }> | undefined;
 }) {
   return (
     <section
@@ -108,11 +108,11 @@ export function StatCard({
 }: {
   label: string;
   value: string | number;
-  unit?: string;
-  hint?: string;
-  icon?: ComponentType<{ className?: string }>;
-  tone?: "primary" | "success" | "warning" | "emergency" | "accent";
-  trend?: string;
+  unit?: string | undefined;
+  hint?: string | undefined;
+  icon?: ComponentType<{ className?: string }> | undefined;
+  tone?: "primary" | "success" | "warning" | "emergency" | "accent" | undefined;
+  trend?: string | undefined;
 }) {
   const toneMap = {
     primary: "bg-primary-soft text-primary",
@@ -151,8 +151,8 @@ export function EmptyState({
 }: {
   title: string;
   description: string;
-  icon?: ComponentType<{ className?: string }>;
-  action?: ReactNode;
+  icon?: ComponentType<{ className?: string }> | undefined;
+  action?: ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border bg-surface/60 px-6 py-12 text-center">
