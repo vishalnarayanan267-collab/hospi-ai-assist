@@ -18,10 +18,10 @@ export function StatusBadge({
   dot = false,
   className,
 }: {
-  tone?: Tone;
+  tone?: Tone | undefined;
   children: ReactNode;
-  dot?: boolean;
-  className?: string;
+  dot?: boolean | undefined;
+  className?: string | undefined;
 }) {
   return (
     <span

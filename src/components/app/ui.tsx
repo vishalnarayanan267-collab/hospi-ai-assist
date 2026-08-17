@@ -142,8 +142,8 @@ export function Progress({
   className,
 }: {
   value: number;
-  tone?: "primary" | "success" | "warning" | "emergency" | "accent";
-  className?: string;
+  tone?: "primary" | "success" | "warning" | "emergency" | "accent" | undefined;
+  className?: string | undefined;
 }) {
   const bar = {
     primary: "bg-primary",
@@ -173,7 +173,7 @@ export function Tabs({
   tabs: { id: string; label: string }[];
   value: string;
   onChange: (id: string) => void;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <div
@@ -211,8 +211,8 @@ export function Avatar({
   tone = "primary",
 }: {
   name: string;
-  className?: string;
-  tone?: "primary" | "accent" | "success" | "emergency";
+  className?: string | undefined;
+  tone?: "primary" | "accent" | "success" | "emergency" | undefined;
 }) {
   const initials = name
     .replace(/^Dr\.?\s*/i, "")
@@ -251,7 +251,7 @@ export function Field({
 }: {
   label: string;
   children: ReactNode;
-  hint?: string;
+  hint?: string | undefined;
 }) {
   const id = useId();
   return (
@@ -272,7 +272,7 @@ export function DataRow({
 }: {
   label: string;
   value: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <div
@@ -292,7 +292,7 @@ export function Chip({
   className,
 }: {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <span
